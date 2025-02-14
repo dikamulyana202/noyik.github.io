@@ -74,30 +74,28 @@
             let messageBox = document.getElementById("messageBox");
             messageBox.style.display = "block";
 
-            // Animasi awal munculnya pesan
             gsap.fromTo(messageBox, { opacity: 0, scale: 0.5 }, { opacity: 1, scale: 1, duration: 0.5, ease: "back.out(1.7)" });
         }
 
         function nextMessage() {
-            let textElement = document.getElementById("text");
-            let stickerElement = document.getElementById("sticker");
+    let textElement = document.getElementById("text");
+    let stickerElement = document.getElementById("sticker");
+    
+    if (index < messages.length) {
+        gsap.to("#messageBox", { scale: 1.2, opacity: 0, duration: 0.3, onComplete: function() {
+            textElement.innerText = messages[index].text;
+            stickerElement.src = messages[index].gif;
+            
+            gsap.fromTo("#messageBox", { scale: 0.8, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.5, ease: "back.out(1.7)" });
+            
+            index++;
+        }});
+    } else {
+        alert("selesaiiiiiiii 💕");
+        location.reload();
+    }
+}
 
-            // Animasi keluar sebelum ganti teks
-            gsap.to("#messageBox", { scale: 1.2, opacity: 0, duration: 0.3, onComplete: function() {
-                if (index < messages.length - 1) {
-                    index++;
-                    textElement.innerText = messages[index].text;
-                    stickerElement.src = messages[index].gif;
-                    
-                    // Animasi masuk setelah ganti teks
-                    gsap.fromTo("#messageBox", { scale: 0.8, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.5, ease: "back.out(1.7)" });
-                } else {
-                    alert("selesaiiiiiiii 💕");
-                    location.reload();
-                }
-            }});
-        }
     </script>
 </body>
 </html>
-
