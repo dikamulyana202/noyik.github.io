@@ -1,1 +1,103 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ucapan Valentine</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: url('bg.jpg') no-repeat center center/cover;
+            text-align: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            flex-direction: column;
+        }
+        .container, .card {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            max-width: 400px;
+        }
+        .card {
+            display: none;
+        }
+        img {
+            width: 150px;
+            margin-bottom: 15px;
+        }
+        button {
+            background: #ff4d6d;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: 0.3s;
+        }
+        button:hover {
+            background: #d43f5e;
+        }
+    </style>
+</head>
+<body>
+    <div class="" id="welcome">
+        <img src="gifs/1.gif" alt="Happy Valentine">
+        <h1>Happy Valentine’s Day! Noyikkk❤️</h1>
+        <p>aku punya sesuatu buat kamuuuu 🥰</p>
+        <button onclick="start()">Klik di sini</button>
+    </div>
+
+    <div class="card" id="messageBox">
+        <img id="sticker" src="gifs/1.gif" alt="sticker">
+        <p id="text">Selamat Hari Valentine, sayang! Aku punya sesuatu untukmu ❤️</p>
+        <button onclick="nextMessage()">Next</button>
+    </div>
+
+    <script>
+        let messages = [
+            { text: "entah seperti apa kedepannya, aku mencintaimu bukan hanya hari ini. aku berhutang banyak bahagia untukmu. maaf jika belum bisa seperti kebanyakan pasangan pada umumnya, tapi ketahuilah bahwa aku benar benar tidak ingin kalah oleh keadaan yang terus memaksa kita untuk berpisah. semuanya telah ada padamu. 💖", gif: "gifs/3.gif" },
+            { text: "terimakasih telah hadir dan menghidupkan kembali warna yang telah lama mati. bertemu dengan mu adalah salah satu keberuntungan yang tidak bisa aku deskripsikan, kamu adalah salah satu keberuntungan yang tidak bisa aku deskripsikan, kamu adalah salah satu bentuk bahagia yang selama ini aku impikan, aku sangat amat bersyukur karena bisa di pertemukan dengan manusia seperti mu 🥰", gif: "gifs/4.gif" },
+            { text: "ayooo kita cari suasan baruu biar rasa yang kemarin sempat goyah bisa kita perbaikii lagii, aku pengen lebih deket sama kamuu, lebih kasih banyakk waktu buat kamuuu, sedikit demi sedikitt ayo kita pudarin kecanggungan kitaaa, kita ga perlu kembali seperti duluu, kita cukup menjadi seseorang yang baruuu, suasana yang baruuuu, sesuatu yang menyenangkannn, aku akan tetap disini buat support kamu kapanpunnn🥰🥰💞💝", gif: "gifs/5.gif" },
+            { text: "aku minta maaf atas semuaaaaaaaaaaaaa sikappppp akuu yanggg sepertiiii kemarinnnn, ayoooo kita  ulanggg lagiii semuanyaaa, dan perbaikiii segalanyaaaaaaa, aku ga mauuu kita hanya stuck disniii, perasaan aku bukan cuman main main ke kamuuu, semogaaa diberikann jalannya untuk ketemuu yahh suatu saat nantiii, makasihhh buattt semuaa halll yang pernah kamu kasih ke akuuu, ungkapan terimakasih ku untukmu adalah bentuk penghargaan yang tidak akan pernah ternilai jika di hitung, aku ingin mengucapkan terimakasih, terimakasih karena telah sabar menghadapi ku, terimakasih karena telah menerima ku dengan apa adanya, teriamakasih telah menguatkan ku dalam segala hal yang membuat ku patah, dan terimakasih juga karena kamu telah menjadi support sistem terbaik dalam hidupku, i love youuu🤍🤍🤍🤍🤍🤍🤍🤍", gif: "gifs/5.gif" }
+        ];
+        let index = 0;
+
+        function start() {
+            document.getElementById("welcome").style.display = "none";
+            let messageBox = document.getElementById("messageBox");
+            messageBox.style.display = "block";
+
+            // Animasi awal munculnya pesan
+            gsap.fromTo(messageBox, { opacity: 0, scale: 0.5 }, { opacity: 1, scale: 1, duration: 0.5, ease: "back.out(1.7)" });
+        }
+
+        function nextMessage() {
+            let textElement = document.getElementById("text");
+            let stickerElement = document.getElementById("sticker");
+
+            // Animasi keluar sebelum ganti teks
+            gsap.to("#messageBox", { scale: 1.2, opacity: 0, duration: 0.3, onComplete: function() {
+                if (index < messages.length - 1) {
+                    index++;
+                    textElement.innerText = messages[index].text;
+                    stickerElement.src = messages[index].gif;
+                    
+                    // Animasi masuk setelah ganti teks
+                    gsap.fromTo("#messageBox", { scale: 0.8, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.5, ease: "back.out(1.7)" });
+                } else {
+                    alert("selesaiiiiiiii 💕");
+                    location.reload();
+                }
+            }});
+        }
+    </script>
+</body>
+</html>
 
